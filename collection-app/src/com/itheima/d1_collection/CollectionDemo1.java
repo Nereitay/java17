@@ -27,7 +27,7 @@ import java.util.HashSet;
 public class CollectionDemo1 {
     public static void main(String[] args) {
         /*
-        有序 可重复 有索引
+        有序 可重复 有索引 => List
          */
         Collection list = new ArrayList();
         list.add("Java");
@@ -40,19 +40,22 @@ public class CollectionDemo1 {
         System.out.println(list);
 
         /*
-         无序 不重复  无索引
+         无序 不重复  无索引 => Set
          */
-        Collection list1 = new HashSet();
-        list1.add("Java");
-        list1.add("Java");
-        list1.add("Mybatis");
-        list1.add(23);
-        list1.add(23);
-        list1.add(false);
-        list1.add(false);
-        System.out.println(list1);
+        Collection set = new HashSet();
+        set.add("Java");
+        set.add("Java");
+        set.add("Mybatis");
+        set.add(23);
+        set.add(23);
+        set.add(false);
+        set.add(false);
+        System.out.println(set);
 
         System.out.println("-----------------------------");
+        /*
+        集合都是支持泛型的，可以在编译阶段约束集合只能操作某种数据类型
+         */
         // Collection<String> list2 = new ArrayList<String>();
         Collection<String> list2 = new ArrayList<>(); // JDK 7开始之后后面类型申明可以不写
         list2.add("Java");
@@ -60,7 +63,8 @@ public class CollectionDemo1 {
         list2.add("黑马");
 
         /*
-         集合和泛型不支持基本数据类型，只能支持引用数据类型
+         集合和泛型不支持基本数据类型，只能支持引用数据类型,所以集合中存储的元素都认为是对象
+             存储基本类型使用包装类
          */
         // Collection<int> list3 = new ArrayList<>();
         Collection<Integer> list3 = new ArrayList<>();

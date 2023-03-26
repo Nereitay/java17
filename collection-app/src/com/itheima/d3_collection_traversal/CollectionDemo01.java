@@ -42,7 +42,9 @@ public class CollectionDemo01 {
         // [赵敏, 小昭, 素素, 灭绝]
         //   it
 
-        // 1、得到当前集合的迭代器对象。
+        /*
+         1、得到当前集合的迭代器对象。
+         */
         Iterator<String> it = lists.iterator();
 //        String ele = it.next();
 //        System.out.println(ele);
@@ -51,12 +53,17 @@ public class CollectionDemo01 {
 //        System.out.println(it.next());
         // System.out.println(it.next()); // NoSuchElementException 出现无此元素异常的错误
 
-        // 2、定义while循环
+        /*
+         2、定义while循环
+         */
         while (it.hasNext()){
             String ele = it.next();
             System.out.println(ele);
         }
         System.out.println("-----------------------------");
 
+        /*
+        迭代器如果取元素越界会出现NoSuchElementException异常
+         */
     }
 }

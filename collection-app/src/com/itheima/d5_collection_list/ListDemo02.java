@@ -22,7 +22,7 @@ public class ListDemo02 {
         lists.add("java2");
         lists.add("java3");
 
-        /** （1）for循环。 */
+        /* （1）for循环。=> 可以知道每次遍历到的位置，如：只需要遍历奇数位 */
         System.out.println("-----------------------");
 
         for (int i = 0; i < lists.size(); i++) {
@@ -31,7 +31,7 @@ public class ListDemo02 {
         }
 
 
-        /** （2）迭代器。 */
+        /* （2）迭代器。 */
         System.out.println("-----------------------");
         Iterator<String> it = lists.iterator();
         while (it.hasNext()){
@@ -39,17 +39,15 @@ public class ListDemo02 {
             System.out.println(ele);
         }
 
-        /** （3）foreach */
+        /* （3）foreach */
         System.out.println("-----------------------");
         for (String ele : lists) {
             System.out.println(ele);
         }
 
-        /** （4）JDK 1.8开始之后的Lambda表达式  */
+        /* （4）JDK 1.8开始之后的Lambda表达式  */
         System.out.println("-----------------------");
-        lists.forEach(s -> {
-            System.out.println(s);
-        });
+        lists.forEach(System.out::println);
 
     }
 }

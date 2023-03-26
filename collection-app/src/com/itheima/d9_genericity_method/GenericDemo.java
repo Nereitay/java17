@@ -30,6 +30,9 @@ public class GenericDemo {
         String[]  names2 = getArr(names);
     }
 
+    /*
+        不用强转
+     */
     public static <T> T[] getArr(T[] arr){
         return arr;
     }

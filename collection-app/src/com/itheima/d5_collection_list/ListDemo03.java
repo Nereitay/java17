@@ -25,7 +25,8 @@ import java.util.List;
              -- ArrayList： 添加的元素，是有序，可重复，有索引的。
 
      LinkedList也是List的实现类：底层是基于双链表的，增删比较快，查询慢！！
-     LinkedList是支持双链表，定位前后的元素是非常快的，增删首尾的元素也是最快的
+     LinkedList是支持双链表，定位前后的元素是非常快的，**增删首尾的元素也是最快的**
+
      所以LinkedList除了拥有List集合的全部功能还多了很多操作首尾元素的特殊功能：
          - public void addFirst(E e):将指定元素插入此列表的开头。
          - public void addLast(E e):将指定元素添加到此列表的结尾。
@@ -49,7 +50,7 @@ public class ListDemo03 {
         // 1、做一个队列：
         LinkedList<String> queue = new LinkedList<>();
         // 入队
-        queue.addLast("1号");
+        queue.offerLast("1号");
         queue.addLast("2号");
         queue.addLast("3号");
         System.out.println(queue);

@@ -22,7 +22,9 @@ public class CollectionDemo {
     public static void main(String[] args) {
         // HashSet:添加的元素是无序，不重复，无索引。
         Collection<String> c = new ArrayList<>();
-        // 1.添加元素, 添加成功返回true。
+        /*
+         1.添加元素, 添加成功返回true。
+         */
         c.add("Java");
         c.add("HTML");
         System.out.println(c.add("HTML"));
@@ -31,28 +33,40 @@ public class CollectionDemo {
         System.out.println(c.add("黑马"));
         System.out.println(c); // [Java, HTML, HTML, MySQL, Java, 黑马]
 
-        // 2.清空集合的元素。
+        /*
+         2.清空集合的元素。
+         */
         // c.clear();
         // System.out.println(c);
 
-        // 3.判断集合是否为空 是空返回true,反之。
+        /*
+         3.判断集合是否为空 是空返回true,反之。
+         */
         // System.out.println(c.isEmpty());
 
-        // 4.获取集合的大小。
+        /*
+         4.获取集合的大小。
+         */
         System.out.println(c.size());
 
-        // 5.判断集合中是否包含某个元素。
+        /*
+         5.判断集合中是否包含某个元素。
+         */
         System.out.println(c.contains("Java"));  // true
         System.out.println(c.contains("java")); // false
         System.out.println(c.contains("黑马")); // true
 
-        // 6.删除某个元素:如果有多个重复元素默认删除前面的第一个！
+        /*
+         6.删除某个元素:如果有多个重复元素默认删除前面的第一个！
+         */
         System.out.println(c.remove("java")); // false
         System.out.println(c);
         System.out.println(c.remove("Java")); // true
         System.out.println(c);
 
-        // 7.把集合转换成数组  [HTML, HTML, MySQL, Java, 黑马]
+        /*
+         7.把集合转换成数组  [HTML, HTML, MySQL, Java, 黑马]
+         */
         Object[] arrs = c.toArray();
         System.out.println("数组：" + Arrays.toString(arrs));
 

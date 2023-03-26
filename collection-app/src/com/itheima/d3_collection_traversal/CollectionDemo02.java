@@ -42,9 +42,21 @@ public class CollectionDemo02 {
         double[] scores = {100, 99.5 , 59.5};
         for (double score : scores) {
             System.out.println(score);
+            /*
+                增强for修改变量, 修改第三方变量的值不会影响到集合中的元素
+             */
 //            if(score == 59.5){
 //                score = 100.0; // 修改无意义，不会影响数组的元素值。
 //            }
+        }
+
+        /*
+            用fori修改成功
+         */
+        for (int i = 0; i < scores.length; i++) {
+            if(scores[i] == 59.5){
+                scores[i] = 100.0;
+            }
         }
         System.out.println(Arrays.toString(scores));
 

@@ -6,6 +6,17 @@ import java.util.List;
 
 /**
     目标：研究集合遍历并删除元素可能出现的：并发修改异常问题。
+ 从集合中的一批元素中找出某些数据并删除，如何操作？是否存在问题呢 ？
+
+ 哪些遍历存在问题？
+    - 迭代器遍历集合且直接用集合删除元素的时候可能出现。
+    - 增强for循环遍历集合且直接用集合删除元素的时候可能出现。
+
+ 哪种遍历且删除元素不出问题
+    - 迭代器遍历集合但是用迭代器自己的删除方法操作可以解决。
+    - 使用for循环遍历并删除元素不会存在这个问题。
+
+
  */
 public class Test {
     public static void main(String[] args) {
@@ -21,34 +32,46 @@ public class Test {
         // [黑马, Java, Java, 赵敏, 赵敏, 素素]
         //        it
 
-        // 需求：删除全部的Java信息。
-        // a、迭代器遍历删除
+//         需求：删除全部的Java信息。
+        /*
+        a、迭代器遍历删除
+         */
         Iterator<String> it = list.iterator();
 //        while (it.hasNext()){
 //            String ele = it.next();
 //            if("Java".equals(ele)){
 //                // 删除Java
 //                // list.remove(ele); // 集合删除会出毛病
-//                it.remove(); // 删除迭代器所在位置的元素值（没毛病）
+//                it.remove(); // 删除迭代器所在位置的元素值（没毛病）-- 删除当前所在的元素，并且不会后移
 //            }
 //        }
 //        System.out.println(list);
 
-        // b、foreach遍历删除 (会出现问题，这种无法解决的，foreach不能边遍历边删除，会出bug)
+        /*
+         b、foreach遍历删除 (会出现问题，这种无法解决的，foreach不能边遍历边删除，会出bug)
+           -- foreach是Iterable接口的默认方法，使用iterator迭代器
+         */
 //        for (String s : list) {
 //            if("Java".equals(s)){
 //                list.remove(s);
 //            }
 //        }
 
-        // c、lambda表达式(会出现问题，这种无法解决的，Lambda遍历不能边遍历边删除，会出bug)
+        /*
+         c、lambda表达式(会出现问题，这种无法解决的，Lambda遍历不能边遍历边删除，会出bug)
+           -- 内部用的foreach循环
+         */
 //        list.forEach(s -> {
 //            if("Java".equals(s)){
 //                list.remove(s);
 //            }
 //        });
 
-        // d、for循环(边遍历边删除集合没毛病，但是必须从后面开始遍历删除才不会出现漏掉应该删除的元素)
+        /*
+         d、for循环(不会出现异常错误，但是会漏删）
+            边遍历边删除集合没毛病，但是必须从后面开始遍历删除才不会出现漏掉应该删除的元素或i--
+         */
+        //方案一
         for (int i = list.size() - 1; i >= 0 ; i--) {
             String ele = list.get(i);
             if("Java".equals(ele)){
@@ -56,5 +79,16 @@ public class Test {
             }
         }
         System.out.println(list);
+
+        //方案二
+//        for (int i = 0; i < list.size(); i++) {
+//            String ele = list.get(i);
+//            if ("Java".equals(ele)) {
+//                list.remove(ele);
+//                i--;
+//            }
+//        }
+//        System.out.println(list);
+
     }
 }
