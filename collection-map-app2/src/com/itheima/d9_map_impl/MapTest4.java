@@ -4,14 +4,21 @@ import java.util.*;
 
 /**
    需求：统计投票人数
+ 某个班级多名学生，现在需要组成秋游活动，班长提供了四个景点依次是（A、B、C、D）,每个学生可以选择多个景点，请统计出最终哪个景点想去的人数最多
+
+ 集合的嵌套
  */
 public class MapTest4 {
     public static void main(String[] args) {
-        // 1、要求程序记录每个学生选择的情况。
+        /*
+         1、要求程序记录每个学生选择的情况。
+         */
         // 使用一个Map集合存储。
         Map<String, List<String>> data = new HashMap<>();
 
-        // 2、把学生选择的数据存入进去。
+        /*
+         2、把学生选择的数据存入进去。
+         */
         List<String> selects = new ArrayList<>();
         Collections.addAll(selects, "A", "C");
         data.put("罗勇", selects);
@@ -26,10 +33,14 @@ public class MapTest4 {
 
         System.out.println(data);
 
-        // 3、统计每个景点选择的人数。
+        /*
+         3、统计每个景点选择的人数。
+         */
         Map<String, Integer> infos = new HashMap<>(); // {}
 
-        // 4、提取所有人选择的景点的信息。
+        /*
+         4、提取所有人选择的景点的信息。
+         */
         Collection<List<String>> values = data.values();
         System.out.println(values);
         // values = [[A, B, C, D], [B, C, D], [A, C]]

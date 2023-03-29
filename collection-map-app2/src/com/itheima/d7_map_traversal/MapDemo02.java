@@ -41,9 +41,13 @@ public class MapDemo02 {
                 👇
             此时可以使用foreach遍历
        */
-       // 1、把Map集合转换成Set集合
+       /*
+        1、把Map集合转换成Set集合
+        */
         Set<Map.Entry<String, Integer>> entries = maps.entrySet();
-        // 2、开始遍历
+        /*
+         2、开始遍历
+         */
         for(Map.Entry<String, Integer> entry : entries){
             String key = entry.getKey();
             int value = entry.getValue();

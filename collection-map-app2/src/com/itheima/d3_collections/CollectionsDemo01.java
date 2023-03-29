@@ -21,17 +21,27 @@ public class CollectionsDemo01 {
         //names.add("胡铁花");
         //names.add("张无忌");
         //names.add("陆小凤");
+        /*
+        1. public static <T> boolean addAll(Collection<? super T> c, T... elements)
+           给集合对象批量添加元素！
+         */
         Collections.addAll(names, "楚留香","胡铁花", "张无忌","陆小凤");
         System.out.println(names);
 
-        // 2、public static void shuffle(List<?> list) :打乱集合顺序。
+        /*
+         2、public static void shuffle(List<?> list) :
+            打乱List集合顺序。
+         */
         Collections.shuffle(names);
         System.out.println(names);
 
-        // 3、 public static <T> void sort(List<T> list):将集合中元素按照默认规则排序。 （排值特性的元素）
         List<Integer> list = new ArrayList<>();
         Collections.addAll(list, 12, 23, 2, 4);
         System.out.println(list);
+        /*
+         3、 public static <T> void sort(List<T> list):
+            将List集合中元素按照默认规则排序。 （排值特性的元素）
+         */
         Collections.sort(list);
         System.out.println(list);
     }

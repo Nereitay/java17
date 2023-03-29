@@ -40,6 +40,9 @@ public class Student {
         this.sex = sex;
     }
 
+    /*
+    IDE自动生成重写hashcode和equals方法
+     */
     /**
        只要2个对象内容一样，结果一定是true
      * @param o

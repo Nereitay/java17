@@ -60,13 +60,17 @@ public class Apple implements Comparable<Apple>{
 
     /**
       方式一：类自定义比较规则
-      o1.compareTo(o2)
+     让自定义的类实现Comparable接口重写里面的compareTo方法来定制比较规则。
+     o1.compareTo(o2)
      * @param o
      * @return
      */
     @Override
     public int compareTo(Apple o) {
         // 按照重量进行比较的
+        /*
+        如果认为第一个元素等于第二个元素返回0即可，此时Treeset集合只会保留一个元素，认为两者重复
+         */
         return this.weight - o.weight ; // 去重重量重复的元素
         // return this.weight - o.weight >= 0 ? 1 : -1; // 保留重量重复的元素
     }

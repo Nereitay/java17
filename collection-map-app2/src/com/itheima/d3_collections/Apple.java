@@ -66,7 +66,10 @@ public class Apple implements Comparable<Apple>{
      */
     @Override
     public int compareTo(Apple o) {
+        /*
+            List集存储相同大小的元素 会保留！
+         */
         // 按照重量进行比较的
-        return this.weight - o.weight ; // List集存储相同大小的元素 会保留！
+        return this.weight - o.weight ;
     }
 }

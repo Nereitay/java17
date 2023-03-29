@@ -24,10 +24,15 @@ public class CollectionsDemo02 {
         apples.add(new Apple("绿苹果", "青色", 29.9, 400));
         apples.add(new Apple("黄苹果", "黄色", 9.8, 500));
 
-//        Collections.sort(apples); // 方法一：可以的，Apple类已经重写了比较规则
+        /*
+         方法一：可以的，Apple类已经重写了比较规则
+         */
+//        Collections.sort(apples);
 //        System.out.println(apples);
 
-        // 方式二：sort方法自带比较器对象
+        /*
+         方式二：sort方法自带比较器对象
+         */
 //        Collections.sort(apples, new Comparator<Apple>() {
 //            @Override
 //            public int compare(Apple o1, Apple o2) {
@@ -36,6 +41,9 @@ public class CollectionsDemo02 {
 //        });
 
         Collections.sort(apples, ( o1,  o2) ->  Double.compare(o1.getPrice() , o2.getPrice()) );
+//        Collections.sort(apples, Comparator.comparingDouble(Apple::getPrice));
+//        apples.sort(Comparator.comparingDouble(Apple::getPrice));
+
         System.out.println(apples);
 
     }

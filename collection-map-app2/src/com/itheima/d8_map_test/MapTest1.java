@@ -17,7 +17,7 @@ public class MapTest1 {
         System.out.println(sb);
 
         // 2、定义一个Map集合记录最终统计的结果： A=30 B=20 C=20 D=10  键是景点 值是选择的数量
-        Map<Character, Integer> infos = new HashMap<>(); //
+        Map<Character, Integer> infos = new HashMap<>(); // {} 起始空
 
         // 3、遍历80个学生选择的数据
         for (int i = 0; i < sb.length(); i++) {
