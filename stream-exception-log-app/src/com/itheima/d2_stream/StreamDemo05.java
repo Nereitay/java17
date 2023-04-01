@@ -1,16 +1,18 @@
 package com.itheima.d2_stream;
 
-import java.util.*;
-import java.util.function.IntFunction;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
  /**
   * 目标：收集Stream流的数据到 集合或者数组中去。
-  *
+  * <p>
  * 注意：终结操作方法，调用完成后流就无法继续使用了，原因是不会返回Stream了
- *
+ * <p>
  * 终结和非终结方法的含义是什么?
  *  - 终结方法后流不可以继续使用，非终结方法会返回新的流，支持链式编程
  */
