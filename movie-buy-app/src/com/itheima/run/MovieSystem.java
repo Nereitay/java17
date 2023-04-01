@@ -13,12 +13,12 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class MovieSystem {
-    /**
+    /*
         定义系统的数据容器用户存储数据
         1、存储很多用户（客户对象，商家对象）
      */
     public static final List<User> ALL_USERS = new ArrayList<>();
-    /**
+    /*
        2、存储系统全部商家和其排片信息 。
            商家1 = [p1,p2,p3,...]
            商家2 = [p2,p3,...]
@@ -34,7 +34,7 @@ public class MovieSystem {
 
     public static final Logger LOGGER = LoggerFactory.getLogger("MovieSystem.class");
 
-    /**
+    /*
        3、准备一些测试数据
      */
     static {
@@ -235,9 +235,9 @@ public class MovieSystem {
 
                         movie.setName(name);
                         movie.setActor(actor);
-                        movie.setPrice(Double.valueOf(price));
-                        movie.setTime(Double.valueOf(time));
-                        movie.setNumber(Integer.valueOf(totalNumber));
+                        movie.setPrice(Double.parseDouble(price));
+                        movie.setTime(Double.parseDouble(time));
+                        movie.setNumber(Integer.parseInt(totalNumber));
                         movie.setStartTime(sdf.parse(stime));
 
                         System.out.println("恭喜您，您成功修改了该影片了！！！");
@@ -343,9 +343,9 @@ public class MovieSystem {
             try {
                 System.out.println("请您输入影片放映时间：");
                 String stime  = SYS_SC.nextLine();
-            // public Movie(String name, String actor, double time, double price, int number, Date startTime)        // 封装成电影对象 ，加入集合movices中去
-                Movie movie = new Movie(name, actor ,Double.valueOf(time) , Double.valueOf(price)
-                        , Integer.valueOf(totalNumber) ,  sdf.parse(stime));
+            // public Movie(String name, String actor, double time, double price, int number, Date startTime)        // 封装成电影对象 ，加入集合movies中去
+                Movie movie = new Movie(name, actor ,Double.parseDouble(time) , Double.parseDouble(price)
+                        , Integer.parseInt(totalNumber) ,  sdf.parse(stime));
                 movies.add(movie);
                 System.out.println("您已经成功上架了：《" + movie.getName() + "》");
                 return; // 直接退出去
@@ -571,7 +571,6 @@ public class MovieSystem {
 
     /**
        根据商家店铺名称查询商家对象
-     * @return
      */
     public static Business getBusinessByShopName(String shopName){
         Set<Business> businesses = ALL_MOVIES.keySet();
