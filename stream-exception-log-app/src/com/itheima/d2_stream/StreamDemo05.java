@@ -5,9 +5,16 @@ import java.util.function.IntFunction;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/**
-     目标：收集Stream流的数据到 集合或者数组中去。
+
+ /**
+  * 目标：收集Stream流的数据到 集合或者数组中去。
+  *
+ * 注意：终结操作方法，调用完成后流就无法继续使用了，原因是不会返回Stream了
+ *
+ * 终结和非终结方法的含义是什么?
+ *  - 终结方法后流不可以继续使用，非终结方法会返回新的流，支持链式编程
  */
+
 public class StreamDemo05 {
     public static void main(String[] args) {
         List<String> list = new ArrayList<>();
@@ -27,7 +34,9 @@ public class StreamDemo05 {
 //       list1.add("java");
 //       System.out.println(list1);
 
-        // 注意注意注意：“流只能使用一次”
+        /*
+         注意注意注意：“流只能使用一次”
+         */
         Stream<String> s2 = list.stream().filter(s -> s.startsWith("张"));
         Set<String> zhangSet = s2.collect(Collectors.toSet());
         System.out.println(zhangSet);

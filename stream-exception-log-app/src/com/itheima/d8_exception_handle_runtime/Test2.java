@@ -3,6 +3,7 @@ package com.itheima.d8_exception_handle_runtime;
 import java.util.Scanner;
 
 /**
+ * 异常处理使代码更稳健的案例
     需求：需要输入一个合法的价格为止 要求价格大于 0
  */
 public class Test2 {
@@ -13,7 +14,7 @@ public class Test2 {
                 System.out.println("请您输入合法的价格：");
                 String priceStr = sc.nextLine();
                 // 转换成double类型的价格
-                double price = Double.valueOf(priceStr);
+                double price = Double.parseDouble(priceStr);
 
                 // 判断价格是否大于 0
                 if(price > 0) {

@@ -6,6 +6,14 @@ import java.util.List;
 
 /**
    目标：初步体验Stream流的方便与快捷
+
+ Stream流的作用是什么，结合了什么技术？
+    - 简化集合、数组操作的API。结合了Lambda表达式
+
+ 说说Stream流的思想和使用步骤
+    - 先得到集合或者数组的Stream流（就是一根传送带）。
+    - 把元素放上去。
+    - 然后就用这个Stream流简化的API来方便的操作元素
  */
 public class StreamTest {
     public static void main(String[] args) {
@@ -32,6 +40,6 @@ public class StreamTest {
 //        System.out.println(zhangThreeList);
 
         // 3、使用Stream实现的
-        names.stream().filter(s -> s.startsWith("张")).filter(s -> s.length() == 3).forEach(s -> System.out.println(s));
+        names.stream().filter(s -> s.startsWith("张")).filter(s -> s.length() == 3).forEach(System.out::println);
     }
 }

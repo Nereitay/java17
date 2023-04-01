@@ -28,7 +28,7 @@ public class ExceptionDemo {
     public static void main(String[] args) {
 //        try {
 //            checkAge(-34);
-//        } catch (ItheimaAgeIlleagalException e) {
+//        } catch (ItheimaAgeIllegalException e) {
 //            e.printStackTrace();
 //        }
 
@@ -38,24 +38,22 @@ public class ExceptionDemo {
             e.printStackTrace();
         }
     }
-
+/*
+ 抛出去一个异常对象给调用者
+  - throw ：在方法内部直接创建一个异常对象，并从此点抛出
+  - throws : 用在方法申明上的，抛出方法内部的异常
+ */
     public static void checkAge2(int age)  {
         if(age < 0 || age > 200){
-            // 抛出去一个异常对象给调用者
-            // throw ：在方法内部直接创建一个异常对象，并从此点抛出
-            // throws : 用在方法申明上的，抛出方法内部的异常
-            throw new ItheimaAgeIlleagalRuntimeException(age + " is illeagal!");
+            throw new ItheimaAgeIllegalRuntimeException(age + " is illeagal!"); // 运行异常，提醒不强烈
         }else {
             System.out.println("年龄合法：推荐商品给其购买~~");
         }
     }
 
-    public static void checkAge(int age) throws ItheimaAgeIlleagalException {
+    public static void checkAge(int age) throws ItheimaAgeIllegalException {//编译异常，一定要处理，非必要不要定义成编译异常
         if(age < 0 || age > 200){
-            // 抛出去一个异常对象给调用者
-            // throw ：在方法内部直接创建一个异常对象，并从此点抛出
-            // throws : 用在方法申明上的，抛出方法内部的异常
-            throw new ItheimaAgeIlleagalException(age + " is illeagal!");
+            throw new ItheimaAgeIllegalException(age + " is illeagal!");
         }else {
             System.out.println("年龄合法：推荐商品给其购买~~");
         }

@@ -9,6 +9,10 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 /**
+ * 注意：
+ *  - 中间方法也称为非终结方法，调用完成后返回新的Stream流可以继续使用，支持链式编程。
+ *  - 在Stream流中无法直接修改集合、数组中的数据。
+ *
      目标：Stream流的常用API
          forEach : 逐一处理(遍历)
          count：统计个数
@@ -30,8 +34,10 @@ public class StreamDemo03 {
         list.add("张三丰");
         list.add("张三丰");
 
-        // Stream<T> filter(Predicate<? super T> predicate)
-        list.stream().filter(s -> s.startsWith("张")).forEach(s -> System.out.println(s));
+        /*
+         Stream<T> filter(Predicate<? super T> predicate)
+         */
+        list.stream().filter(s -> s.startsWith("张")).forEach(System.out::println);
 
         long size = list.stream().filter(s -> s.length() == 3).count();
         System.out.println(size);
@@ -41,19 +47,24 @@ public class StreamDemo03 {
 
         list.stream().filter(s -> s.startsWith("张")).skip(2).forEach(System.out::println);
 
-        // map加工方法: 第一个参数原材料  -> 第二个参数是加工后的结果。
+        /*
+         map加工方法: 第一个参数原材料  -> 第二个参数是加工后的结果。
+         */
         // 给集合元素的前面都加上一个：黑马的：
-        list.stream().map(s -> "黑马的：" + s).forEach(a -> System.out.println(a));
+        list.stream().map(s -> "黑马的：" + s).forEach(System.out::println);
 
         // 需求：把所有的名称 都加工成一个学生对象。
          list.stream().map(s -> new Student(s)).forEach(s -> System.out.println(s));
 //        list.stream().map(Student::new).forEach(System.out::println); // 构造器引用  方法引用
 
-        // 合并流。
+        /*
+        Stream.concat()
+         合并流。
+         */
         Stream<String> s1 = list.stream().filter(s -> s.startsWith("张"));
         Stream<String> s2 = Stream.of("java1", "java2");
         // public static <T> Stream<T> concat(Stream<? extends T> a, Stream<? extends T> b)
         Stream<String> s3 = Stream.concat(s1 , s2);
-        s3.distinct().forEach(s -> System.out.println(s));
+        s3.distinct().forEach(System.out::println);
     }
 }

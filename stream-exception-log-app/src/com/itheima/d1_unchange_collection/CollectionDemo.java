@@ -1,12 +1,21 @@
 package com.itheima.d1_unchange_collection;
 
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 /**
      目标：不可变集合。
+ 不可变集合，就是不可被修改的集合。
+    集合的数据项在创建的时候提供，并且在整个生命周期中都不可改变（定义完成后不可以修改，或者添加、删除）否则报错。
+
+ 为什么要创建不可变集合？
+    - 如果某个数据不能被修改，把它防御性地拷贝到不可变集合中是个很好的实践。
+    - 或者当集合对象被不可信的库调用时，不可变形式是安全的
+
+ 如何创建不可变集合？
+    - List、Set、Map接口中，都存在of方法可以创建不可变集合
  */
 public class CollectionDemo {
     public static void main(String[] args) {

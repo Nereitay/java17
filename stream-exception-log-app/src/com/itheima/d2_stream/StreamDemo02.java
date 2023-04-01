@@ -10,8 +10,12 @@ import java.util.stream.Stream;
                  是先得到集合或者数组的Stream流（就是一根传送带）
                  然后就用这个Stream流操作集合或者数组的元素。
                  然后用Stream流简化替代集合操作的API.
+ Stream流的三类方法
+    1. 获取Stream流
+    2. 中间方法
+    3. 终结方法： 一个Stream流只能有一个终结方法，是流水线上的最后一个操作
 
-     集合获取流的API:
+ 集合获取流的API:
          (1) default Stream<E> stream();
 
      小结：
@@ -20,11 +24,11 @@ import java.util.stream.Stream;
  */
 public class StreamDemo02 {
     public static void main(String[] args) {
-        /** --------------------Collection集合获取流-------------------------------   */
+        /* --------------------Collection集合获取流-------------------------------   */
         Collection<String> list = new ArrayList<>();
         Stream<String> s =  list.stream();
 
-        /** --------------------Map集合获取流-------------------------------   */
+        /* --------------------Map集合获取流-------------------------------   */
         Map<String, Integer> maps = new HashMap<>();
         // 键流
         Stream<String> keyStream = maps.keySet().stream();
@@ -33,7 +37,7 @@ public class StreamDemo02 {
         // 键值对流（拿整体）
         Stream<Map.Entry<String,Integer>> keyAndValueStream =  maps.entrySet().stream();
 
-        /** ---------------------数组获取流------------------------------   */
+        /* ---------------------数组获取流------------------------------   */
         String[] names = {"赵敏","小昭","灭绝","周芷若"};
         Stream<String> nameStream = Arrays.stream(names);
         Stream<String> nameStream2 = Stream.of(names);

@@ -22,7 +22,7 @@ package com.itheima.d3_exception;
                        编译时异常      RuntimeException(运行时异常)
 
 
-         Error : 错误的意思，严重错误Error，无法通过处理的错误，一旦出现，程序员无能为力了，
+         Error : 错误的意思，严重错误Error，无法通过处理的错误，系统级别问题，一旦出现，程序员无能为力了，
             只能重启系统，优化项目。
             比如内存奔溃，JVM本身的奔溃。这个程序员无需理会。
 
