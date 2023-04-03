@@ -38,6 +38,14 @@ public class PropertiesDemo01 {
     public static void main(String[] args) throws Exception {
         // 需求：使用Properties把键值对信息存入到属性文件中去。
         Properties properties = new Properties();
+
+        properties.put("mapMethod", "put");
+
+        /*
+        public synchronized Object setProperty(String key, String value) {
+            return put(key, value);
+        }
+         */
         properties.setProperty("admin", "123456");
         properties.setProperty("dlei", "003197");
         properties.setProperty("heima", "itcast");
@@ -48,7 +56,7 @@ public class PropertiesDemo01 {
            参数二：保存心得
          */
         properties.store(new FileWriter("io-app2/src/users.properties")
-                , "this is users!! i am very happy! give me 100!");
+                , "this is the location for comments!! users.properties");
 
     }
 }

@@ -1,5 +1,7 @@
 package com.itheima.d8_commons_io;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+
 import java.io.File;
 
 /**
@@ -28,20 +30,27 @@ import java.io.File;
 public class CommonsIODemo01 {
     public static void main(String[] args) throws Exception {
 
-////        // 1.完成文件复制！
+        /*
+         1.完成文件复制！
+         */
 //        IOUtils.copy(new FileInputStream("D:\\resources\\hushui.jpeg"),
 //                new FileOutputStream("D:\\resources\\hushui2.jpeg"));
 
-
-////        // 2.完成文件复制到某个文件夹下！
+        /*
+         2.完成文件复制到某个文件夹下！
+         */
 //        FileUtils.copyFileToDirectory(new File("D:\\resources\\hushui.jpeg"), new File("D:/"));
 
 
-          // 3.完成文件夹复制到某个文件夹下！
+          /*
+           3.完成文件夹复制到某个文件夹下！
+           */
 //          FileUtils.copyDirectoryToDirectory(new File("D:\\resources") , new File("D:\\new"));
 //           FileUtils.deleteDirectory(new File("D:\\new"));
 
-         // JDK1.7 自己也做了一些一行代码完成复制的操作:New IO的技术
+         /*
+          JDK1.7 自己也做了一些一行代码完成复制的操作:New IO的技术
+          */
          // Files.copy(Path.of("D:\\resources\\hushui.jpeg"), Path.of("D:\\resources\\hushui3.jpeg"));
 
         FileUtils.deleteDirectory(new File("D:\\new"));

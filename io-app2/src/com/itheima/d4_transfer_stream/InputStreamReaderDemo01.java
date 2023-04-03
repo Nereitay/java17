@@ -1,6 +1,9 @@
 package com.itheima.d4_transfer_stream;
 
 import java.io.*;
+import java.nio.charset.Charset;
+
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
 /**
      目标：字符输入转换流InputStreamReader的使用。
@@ -28,16 +31,20 @@ public class InputStreamReaderDemo01 {
         // 代码UTF-8   文件 GBK  "D:\\resources\\data.txt"
         // 1、提取GBK文件的原始字节流。   abc 我
         //                            ooo oo
-        InputStream is = new FileInputStream("D:\\resources\\data.txt");
+        InputStream is = new FileInputStream("io-app2/src/data.txt");
         // 2、把原始字节流转换成字符输入流
         // Reader isr = new InputStreamReader(is); // 默认以UTF-8的方式转换成字符流。 还是会乱码的  跟直接使用FileReader是一样的
-        Reader isr = new InputStreamReader(is , "GBK"); // 以指定的GBK编码转换成字符输入流  完美的解决了乱码问题
+        Reader isr = new InputStreamReader(is, ISO_8859_1); // 以指定的GBK编码转换成字符输入流  完美的解决了乱码问题
 
         BufferedReader br = new BufferedReader(isr);
         String line;
         while ((line = br.readLine()) != null){
             System.out.println(line);
         }
+
+        is.close();
+        isr.close();
+        br.close();
     }
 }
 

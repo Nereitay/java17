@@ -1,17 +1,24 @@
 package com.itheima.d5_serializable;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
   对象如果要序列化，必须实现Serializable序列化接口。
  */
 public class Student implements Serializable {
-    // 申明序列化的版本号码
-    // 序列化的版本号与反序列化的版本号必须一致才不会出错！
-    private static final long serialVersionUID = 1;
+    /*
+        申明序列化的版本号码
+        序列化的版本号与反序列化的版本号必须一致才不会出错！
+     */
+    @Serial
+    private static final long serialVersionUID = -7875160919504662359L;
+
     private String name;
     private String loginName;
-    // transient修饰的成员变量不参与序列化了
+    /*
+     transient修饰的成员变量不参与序列化了
+     */
     private transient String passWord;
     private int age ;
 

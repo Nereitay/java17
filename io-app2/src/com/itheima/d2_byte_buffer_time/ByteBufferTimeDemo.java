@@ -5,6 +5,8 @@ import java.io.*;
 /**
     目标：利用字节流的复制统计各种写法形式下缓冲流的性能执行情况。
 
+    性能和设置的字节组大小有关系
+
     复制流：
         （1）使用低级的字节流按照一个一个字节的形式复制文件。
         （2）使用低级的字节流按照一个一个字节数组的形式复制文件。
@@ -16,15 +18,19 @@ import java.io.*;
 
     小结：
         使用高级的缓冲字节流按照一个一个字节数组的形式复制文件，性能好，建议开发使用！
+
+    推荐使用哪种方式提高字节流读写数据的性能？
+        - 建议使用字节缓冲输入流、字节缓冲输出流，结合字节数组的方式，目前来看是性能最优的组合。
+
  */
 public class ByteBufferTimeDemo {
-    private static final String SRC_FILE = "D:\\course\\基础加强\\day08-日志框架、阶段项目\\视频\\14、用户购票功能.avi";
-    private static final String DEST_FILE = "D:\\course\\";
+    private static final String SRC_FILE = "D:/jpg/GranHotel0101.mp4";
+    private static final String DEST_FILE = "io-app2/src/GranHotel0101.mp4";
 
     public static void main(String[] args) {
-        // copy01(); // 使用低级的字节流按照一个一个字节的形式复制文件：慢的让人简直无法忍受。直接被淘汰。
+//         copy01(); // 使用低级的字节流按照一个一个字节的形式复制文件：慢的让人简直无法忍受。直接被淘汰。
         copy02(); // 使用低级的字节流按照一个一个字节数组的形式复制文件: 比较慢，但是还是可以忍受的！
-        // copy03(); // 缓冲流一个一个字节复制：很慢，不建议使用。
+//         copy03(); // 缓冲流一个一个字节复制：很慢，不建议使用。
         copy04(); // 缓冲流一个一个字节数组复制：飞快，简直太完美了（推荐使用）
     }
 
@@ -36,13 +42,13 @@ public class ByteBufferTimeDemo {
                 // a.把原始的字节输入流包装成高级的缓冲字节输入流
                 InputStream bis = new BufferedInputStream(is);
                 // 2、创建低级的字节输出流与目标文件接通
-                OutputStream os = new FileOutputStream(DEST_FILE + "video4.avi");
+                OutputStream os = new FileOutputStream(DEST_FILE);
                 // b.把字节输出流管道包装成高级的缓冲字节输出流管道
                 OutputStream bos = new BufferedOutputStream(os);
         ) {
 
             // 3、定义一个字节数组转移数据
-            byte[] buffer = new byte[1024];
+            byte[] buffer = new byte[1024 * 8 * 8];
             int len; // 记录每次读取的字节数。
             while ((len = bis.read(buffer)) != -1){
                 bos.write(buffer, 0 , len);
@@ -53,6 +59,9 @@ public class ByteBufferTimeDemo {
         }
         long endTime = System.currentTimeMillis();
         System.out.println("使用缓冲的字节流按照一个一个字节数组的形式复制文件耗时：" + (endTime - startTime)/1000.0 + "s");
+
+        //拷贝完后删除
+        deleteFile();
     }
 
 
@@ -65,7 +74,7 @@ public class ByteBufferTimeDemo {
                 // a.把原始的字节输入流包装成高级的缓冲字节输入流
                 InputStream bis = new BufferedInputStream(is);
                 // 2、创建低级的字节输出流与目标文件接通
-                OutputStream os = new FileOutputStream(DEST_FILE + "video3.avi");
+                OutputStream os = new FileOutputStream(DEST_FILE);
                 // b.把字节输出流管道包装成高级的缓冲字节输出流管道
                 OutputStream bos = new BufferedOutputStream(os);
         ){
@@ -80,6 +89,9 @@ public class ByteBufferTimeDemo {
         }
         long endTime = System.currentTimeMillis();
         System.out.println("使用缓冲的字节流按照一个一个字节的形式复制文件耗时：" + (endTime - startTime)/1000.0 + "s");
+
+        //拷贝完后删除
+        deleteFile();
     }
 
 
@@ -90,11 +102,11 @@ public class ByteBufferTimeDemo {
                 // 1、创建一个字节输入流管道与原视频接通
                 InputStream is = new FileInputStream(SRC_FILE);
                 // 2、创建一个字节输出流管道与目标文件接通
-                OutputStream os = new FileOutputStream(DEST_FILE + "video2.avi")
+                OutputStream os = new FileOutputStream(DEST_FILE)
         ) {
 
             // 3、定义一个字节数组转移数据
-            byte[] buffer = new byte[1024];
+            byte[] buffer = new byte[1024 * 8 * 8];
             int len; // 记录每次读取的字节数。
             while ((len = is.read(buffer)) != -1){
                 os.write(buffer, 0 , len);
@@ -104,6 +116,9 @@ public class ByteBufferTimeDemo {
         }
         long endTime = System.currentTimeMillis();
         System.out.println("使用低级的字节流按照一个一个字节数组的形式复制文件耗时：" + (endTime - startTime)/1000.0 + "s");
+
+        //拷贝完后删除
+        deleteFile();
     }
 
     /**
@@ -115,7 +130,7 @@ public class ByteBufferTimeDemo {
                 // 1、创建低级的字节输入流与源文件接通
                 InputStream is = new FileInputStream(SRC_FILE);
                 // 2、创建低级的字节输出流与目标文件接通
-                OutputStream os = new FileOutputStream(DEST_FILE + "video1.avi")
+                OutputStream os = new FileOutputStream(DEST_FILE)
                 ){
 
             // 3、定义一个变量记录每次读取的字节（一个一个字节的复制）
@@ -128,6 +143,16 @@ public class ByteBufferTimeDemo {
         }
         long endTime = System.currentTimeMillis();
         System.out.println("使用低级的字节流按照一个一个字节的形式复制文件耗时：" + (endTime - startTime)/1000.0 + "s");
+
+        //拷贝完后删除
+        deleteFile();
+    }
+
+    private static void deleteFile() {
+        File f = new File(DEST_FILE);
+        if (f.exists()) {
+            System.out.println("CopiedFile deleted: " + f.delete());
+        }
     }
 
 }

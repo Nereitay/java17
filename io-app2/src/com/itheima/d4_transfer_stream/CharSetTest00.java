@@ -18,7 +18,7 @@ public class CharSetTest00 {
 
                 // 代码：UTF-8 文件 GBK  乱码.     abc 我   爱 你中国
                 //                                  oo  oo
-                Reader fr = new FileReader("D:\\resources\\data.txt");
+                Reader fr = new FileReader("io-app2/src/data.txt");
                 // a、把低级的字符输入流包装成高级的缓冲字符输入流。
                 BufferedReader br = new BufferedReader(fr);
         ){
