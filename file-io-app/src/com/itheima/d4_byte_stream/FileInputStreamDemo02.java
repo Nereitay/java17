@@ -2,6 +2,9 @@ package com.itheima.d4_byte_stream;
 import java.io.FileInputStream;
 import java.io.InputStream;
 /**
+ * 每次读取一个字节数组存在什么问题？
+ *  - 读取的性能得到了提升
+ *  - 读取中文字符输出无法避免乱码问题
    目标：使用文件字节输入流每次读取一个字节数组的数据。
  */
 public class FileInputStreamDemo02 {
@@ -20,7 +23,7 @@ public class FileInputStreamDemo02 {
 //        System.out.println("读取了几个字节：" + len1);
 //        String rs1 = new String(buffer);
 //        System.out.println(rs1);
-//        // buffer = [a b c]
+//        // buffer = [a b c] //原文件为：ab3abccd
 //
 //        // buffer = [a b c]  ==>  [c d c]
 //        int len2 = is.read(buffer);
@@ -33,11 +36,14 @@ public class FileInputStreamDemo02 {
 //        System.out.println(len3); // 读取完毕返回-1
 
         // 3、改进使用循环，每次读取一个字节数组
-        byte[] buffer = new byte[3];
+//        byte[] buffer = new byte[3]; //乱码
+        byte[] buffer = new byte[1024];
         int len; // 记录每次读取的字节数。
         while ((len = is.read(buffer)) != -1) {
             // 读取多少倒出多少
             System.out.print(new String(buffer, 0 , len));
         }
+
+        is.close();
     }
 }

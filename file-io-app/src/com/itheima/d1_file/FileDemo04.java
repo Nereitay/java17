@@ -14,7 +14,7 @@ import java.util.Arrays;
 public class FileDemo04 {
     public static void main(String[] args) {
         // 1、定位一个目录
-        File f1 = new File("D:/resources");
+        File f1 = new File("file-io-app/src/com/itheima");
         String[] names = f1.list();
         for (String name : names) {
             System.out.println(name);
@@ -28,7 +28,7 @@ public class FileDemo04 {
         }
 
         // 注意事项
-        File dir = new File("D:/resources/ddd");
+        File dir = new File("file-io-app/src/com/itheima/d1_file");
         File[] files1 = dir.listFiles();
         System.out.println(Arrays.toString(files1));
     }

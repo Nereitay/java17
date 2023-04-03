@@ -3,6 +3,7 @@ package com.itheima.d5_resource;
 import java.io.*;
 
 /**
+ * 需求：将某个磁盘的文件夹拷贝到另一个文件夹下去，包括文件夹中的全部信息
    目标：拷贝文件夹
  */
 public class Test4 {

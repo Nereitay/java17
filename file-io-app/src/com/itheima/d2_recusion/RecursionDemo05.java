@@ -4,11 +4,24 @@ import java.io.File;
 import java.io.IOException;
 
 /**
+ * 非规律化递归案例 - 文件搜索  不是数据化操作而是过程化操作
+ * 非规律化递归问题自己看着办，需要流程化的编程思维
+ * <p>
+ *  需求：文件搜索、从C:盘中，搜索出某个文件名称并输出绝对路径。
+ *  分析：
+ *      - 先定位出的应该是一级文件对象
+ *      - 遍历全部一级文件对象，判断是否是文件
+ *      - 如果是文件，判断是否是自己想要的
+ *      - 如果是文件夹，需要继续递归进去重复上述过程
+ *  文件搜索用到了什么技术
+ *      - 递归，因为listFile只是搜索到了一级文件对象
     目标：去D判断搜索 eDiary.exe文件
  */
 public class RecursionDemo05 {
     public static void main(String[] args) {
-        // 2、传入目录 和  文件名称
+        /*
+         2、传入目录 和  文件名称
+         */
         searchFile(new File("D:/") , "eDiary.exe");
     }
 
@@ -17,35 +30,48 @@ public class RecursionDemo05 {
      * @param dir  被搜索的源目录
      * @param fileName 被搜索的文件名称
      */
-    public static void searchFile(File dir,String fileName){
-        // 3、判断dir是否是目录
-        if(dir != null && dir.isDirectory()){
+    public static void searchFile(File dir, String fileName) {
+        /*
+         3、判断dir是否是目录
+         */
+        if (dir != null && dir.isDirectory()) {
             // 可以找了
-            // 4、提取当前目录下的一级文件对象
+            /*
+             4、提取当前目录下的一级文件对象
+             */
             File[] files = dir.listFiles(); // null  []
-            // 5、判断是否存在一级文件对象，存在才可以遍历
-            if(files != null && files.length > 0) {
+            /*
+             5、判断是否存在一级文件对象，存在才可以遍历
+             */
+            if (files != null && files.length > 0) {
                 for (File file : files) {
-                    // 6、判断当前遍历的一级文件对象是文件 还是 目录
-                    if(file.isFile()){
-                        // 7、是不是咱们要找的，是把其路径输出即可
-                        if(file.getName().contains(fileName)){
+                    /*
+                     6、判断当前遍历的一级文件对象是文件 还是 目录
+                     */
+                    if (file.isFile()) {
+                        /*
+                         7、是不是咱们要找的，是把其路径输出即可
+                         */
+                        if (file.getName().contains(fileName)) {
                             System.out.println("找到了：" + file.getAbsolutePath());
                             // 启动它。
-                            try {
+                            /*try {
                                 Runtime r = Runtime.getRuntime();
                                 r.exec(file.getAbsolutePath());
                             } catch (IOException e) {
                                 e.printStackTrace();
-                            }
+                            }*/
+                            return;
                         }
-                    }else {
-                        // 8、是文件夹，需要继续递归寻找
+                    } else {
+                        /*
+                         8、是文件夹，需要继续递归寻找
+                         */
                         searchFile(file, fileName);
                     }
                 }
             }
-        }else {
+        } else {
             System.out.println("对不起，当前搜索的位置不是文件夹！");
         }
     }

@@ -39,7 +39,9 @@ import java.io.Writer;
  */
 public class FileWriterDemo03 {
     public static void main(String[] args) throws Exception {
-        // 1、创建一个字符输出流管道与目标文件接通
+        /*
+         1、创建一个字符输出流管道与目标文件接通
+         */
         // Writer fw = new FileWriter("file-io-app/src/out08.txt"); // 覆盖管道，每次启动都会清空文件之前的数据
         Writer fw = new FileWriter("file-io-app/src/out08.txt", true); // 覆盖管道，每次启动都会清空文件之前的数据
 
@@ -47,7 +49,8 @@ public class FileWriterDemo03 {
         fw.write(98);
         fw.write('a');
         fw.write('徐'); // 不会出问题了
-        fw.write("\r\n"); // 换行
+//        fw.write("\r\n"); // 换行
+        fw.write(System.lineSeparator()); // 换行
 
 //       b.public void write(String c)写一个字符串出去
         fw.write("abc我是中国人");
@@ -72,6 +75,13 @@ public class FileWriterDemo03 {
 
         // fw.flush();// 刷新后流可以继续使用
         fw.close(); // 关闭包含刷线，关闭后流不能使用
-
     }
+
+    /*
+    5. 字节流、字符流如何选择使用？
+        - 字节流适合做一切文件数据的拷贝（音视频，文本）
+        - 字节流不适合读取中文内容输出
+        - 字符流适合做文本文件的操作（读，写）
+
+     */
 }

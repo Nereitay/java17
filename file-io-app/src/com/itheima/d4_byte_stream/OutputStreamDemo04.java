@@ -34,16 +34,20 @@ import java.io.OutputStream;
  */
 public class OutputStreamDemo04 {
     public static void main(String[] args) throws Exception {
-        // 1、创建一个文件字节输出流管道与目标文件接通
+        /*
+         1、创建一个文件字节输出流管道与目标文件接通
+         */
         OutputStream os = new FileOutputStream("file-io-app/src/out04.txt" , true); // 追加数据管道
 //        OutputStream os = new FileOutputStream("file-io-app/src/out04.txt"); // 先清空之前的数据，写新数据进入
 
-        // 2、写数据出去
+        /*
+         2、写数据出去
+         */
         // a.public void write(int a):写一个字节出去
         os.write('a');
         os.write(98);
         os.write("\r\n".getBytes()); // 换行
-        // os.write('徐'); // [ooo]
+        // os.write('徐'); // [ooo] 三个字节会乱码
 
         // b.public void write(byte[] buffer):写一个字节数组出去。
         byte[] buffer = {'a' , 97, 98, 99};
@@ -51,9 +55,14 @@ public class OutputStreamDemo04 {
         os.write("\r\n".getBytes()); // 换行
 
         byte[] buffer2 = "我是中国人".getBytes();
-//        byte[] buffer2 = "我是中国人".getBytes("GBK");
+//        byte[] buffer2 = "我是中国人".getBytes("GBK"); //编码不一致会乱码
         os.write(buffer2);
-        os.write("\r\n".getBytes()); // 换行
+//        os.write("\r\n".getBytes()); // 换行
+        /*
+        System.lineSeparator()
+        On UNIX systems, it returns "\n"; on Microsoft Windows systems it returns "\r\n"
+         */
+        os.write(System.lineSeparator().getBytes());
 
 
         // c. public void write(byte[] buffer , int pos , int len):写一个字节数组的一部分出去。
@@ -61,7 +70,7 @@ public class OutputStreamDemo04 {
         os.write(buffer3, 0 , 3);
         os.write("\r\n".getBytes()); // 换行
 
-        // os.flush(); // 写数据必须，刷新数据 可以继续使用流
+        // os.flush(); // 写数据必须刷新数据 可以继续使用流
         os.close(); // 释放资源，包含了刷新的！关闭后流不可以使用了
     }
 }

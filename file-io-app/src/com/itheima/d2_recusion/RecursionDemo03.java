@@ -1,7 +1,7 @@
 package com.itheima.d2_recusion;
 
 /**
-      目标：1 - n求和
+ * 递归案例导学-计算1-n的和
  */
 public class RecursionDemo03 {
     public static void main(String[] args) {
