@@ -5,19 +5,37 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
 /**
+ * 前2种线程创建方式都存在一个问题：
+ *  - 他们重写的run方法均不能直接返回结果。不适合需要返回线程执行结果的业务场景
+ * <p>
+ *  JDK 5.0提供了Callable和FutureTask来实现
+ *      - 这种方式的优点是：可以得到线程执行的结果
+ * <p>
+ *  方式三优缺点：
+ *      - 优点：线程任务类只是实现接口，可以继续继承类和实现接口，扩展性强。
+ *      - 可以在线程执行完毕后去获取线程执行的结果。
+ *      - 缺点：编码复杂一点
    目标：学会线程的创建方式三：实现Callable接口，结合FutureTask完成。
  */
 public class ThreadDemo3 {
     public static void main(String[] args) {
-        // 3、创建Callable任务对象
+        /*
+         3、创建Callable任务对象
+         */
         Callable<String> call = new MyCallable(100);
-        // 4、把Callable任务对象 交给 FutureTask 对象
-        //  FutureTask对象的作用1： 是Runnable的对象（实现了Runnable接口），可以交给Thread了
-        //  FutureTask对象的作用2： 可以在线程执行完毕之后通过调用其get方法得到线程执行完成的结果
+        /*
+         4、把Callable任务对象 交给 FutureTask 对象
+            FutureTask对象的作用1： 是Runnable的对象（实现了Runnable接口），可以交给Thread了
+            FutureTask对象的作用2： 可以在线程执行完毕之后通过调用其get方法得到线程执行完成的结果
+         */
         FutureTask<String> f1 = new FutureTask<>(call);
-        // 5、交给线程处理
+        /*
+         5、交给线程处理
+         */
         Thread t1 = new Thread(f1);
-        // 6、启动线程
+        /*
+         6、启动线程
+         */
         t1.start();
 
 
@@ -28,7 +46,7 @@ public class ThreadDemo3 {
 
         try {
             // 如果f1任务没有执行完毕，这里的代码会等待，直到线程1跑完才提取结果。
-            String rs1 = f1.get();
+            String rs1 = f1.get(); // throws InterruptedException, java.util.concurrent.ExecutionException
             System.out.println("第一个结果：" + rs1);
         } catch (Exception e) {
             e.printStackTrace();
@@ -44,16 +62,16 @@ public class ThreadDemo3 {
     }
 }
 
-/**
+/*
     1、定义一个任务类 实现Callable接口  应该申明线程任务执行完毕后的结果的数据类型
  */
 class MyCallable implements Callable<String>{
-    private int n;
+    private final int n;
     public MyCallable(int n) {
         this.n = n;
     }
 
-    /**
+    /*
        2、重写call方法（任务方法）
      */
     @Override

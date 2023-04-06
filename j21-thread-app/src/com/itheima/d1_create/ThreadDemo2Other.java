@@ -1,6 +1,7 @@
 package com.itheima.d1_create;
 
 /**
+ * 多线程的实现方案二：实现Runnable接口(匿名内部类形式)
    目标：学会线程的创建方式二(匿名内部类方式实现，语法形式)
  */
 public class ThreadDemo2Other {

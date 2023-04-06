@@ -8,14 +8,21 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
-    目标：Timer定时器的使用和了解。
+ * ScheduledExecutorService是 jdk1.5中引入了并发包，目的是为了弥补Timer的缺陷, ScheduledExecutorService内部为线程池
+ * ScheduledExecutorService的优点
+ *      - 基于线程池，某个任务的执行情况不会影响其他定时任务的执行
+    目标：ScheduledExecutorService定时器的使用和了解。
  */
 public class TimerDemo2 {
     public static void main(String[] args) {
-        // 1、创建ScheduledExecutorService线程池，做定时器
+        /*
+         1、创建ScheduledExecutorService线程池，做定时器
+         */
         ScheduledExecutorService pool = Executors.newScheduledThreadPool(3);
 
-        // 2、开启定时任务
+        /*
+         2、开启定时任务
+         */
         pool.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -29,6 +36,9 @@ public class TimerDemo2 {
         }, 0, 2, TimeUnit.SECONDS);
 
 
+        /*
+        基于线程池，某个任务的执行情况不会影响其他定时任务的执行
+         */
         pool.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {

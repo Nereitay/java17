@@ -21,6 +21,10 @@ public class ThreadPoolDemo2 {
                 6, TimeUnit.SECONDS, new ArrayBlockingQueue<>(5) , Executors.defaultThreadFactory(),
                new ThreadPoolExecutor.AbortPolicy() );
 
+        /*
+        Future<T> submit(Callable<T> task)
+            执行任务，返回未来任务对象获取线程结果，一般拿来执行 Callable 任务
+         */
         // 2、给任务线程池处理。
         Future<String> f1 = pool.submit(new MyCallable(100));
         Future<String> f2 = pool.submit(new MyCallable(200));
