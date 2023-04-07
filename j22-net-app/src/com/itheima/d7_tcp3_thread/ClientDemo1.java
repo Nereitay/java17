@@ -1,4 +1,4 @@
-package com.itheima.d9_chat;
+package com.itheima.d7_tcp3_thread;
 
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -6,10 +6,7 @@ import java.net.Socket;
 import java.util.Scanner;
 
 /**
-    拓展：即时通信
-
-    客户端：发消息的同时，随时有人发消息过来。
-    服务端：接收消息后，推送给其他所有的在线socket
+    目标：实现服务端可以同时处理多个客户端的消息。
  */
 public class ClientDemo1 {
     public static void main(String[] args) {
@@ -19,10 +16,7 @@ public class ClientDemo1 {
             // public Socket(String host, int port)
             // 参数一：服务端的IP地址
             // 参数二：服务端的端口
-            Socket socket = new Socket("127.0.0.1", 6868);
-
-            // 马上为客户端分配一个独立的线程负责读取它收到的消息
-            new ClientReaderThread(socket).start();
+            Socket socket = new Socket("127.0.0.1", 7777);
 
             // 2、从socket通信管道中得到一个字节输出流 负责发送数据
             OutputStream os = socket.getOutputStream();
@@ -38,6 +32,7 @@ public class ClientDemo1 {
                 ps.println(msg);
                 ps.flush();
             }
+
             // 关闭资源。
             // socket.close();
 

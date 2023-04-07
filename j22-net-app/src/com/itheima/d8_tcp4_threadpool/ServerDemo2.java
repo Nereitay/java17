@@ -1,20 +1,24 @@
-package com.itheima.d8_socket4;
-import com.itheima.d7_socket3.ServerReaderThread;
+package com.itheima.d8_tcp4_threadpool;
 
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.*;
 
 /**
+ * 本次使用线程池的优势在哪里？
+ *      - 服务端可以复用线程处理多个客户端，可以避免系统瘫痪。
+ *      - 适合客户端通信时长较短的场景
    目标：实现服务端可以同时处理多个客户端的消息。
  */
 public class ServerDemo2 {
 
-    // 使用静态变量记住一个线程池对象
-    private static ExecutorService pool = new ThreadPoolExecutor(300,
-            1500, 6, TimeUnit.SECONDS,
+    /*
+     使用静态变量记住一个线程池对象
+     */
+    private static ExecutorService pool = new ThreadPoolExecutor(3,
+            5, 6, TimeUnit.SECONDS,
             new ArrayBlockingQueue<>(2)
-    , Executors.defaultThreadFactory(), new ThreadPoolExecutor.AbortPolicy());
+    , Executors.defaultThreadFactory(), new ThreadPoolExecutor.AbortPolicy()); // java.util.concurrent.RejectedExecutionException
 
     public static void main(String[] args) {
         try {
@@ -27,7 +31,9 @@ public class ServerDemo2 {
                 Socket socket = serverSocket.accept();
                 System.out.println(socket.getRemoteSocketAddress()+ "它来了，上线了！");
 
-                // 任务对象负责读取消息。
+                /*
+                 任务对象负责读取消息。
+                 */
                 Runnable target = new ServerReaderRunnable(socket);
                 pool.execute(target);
             }

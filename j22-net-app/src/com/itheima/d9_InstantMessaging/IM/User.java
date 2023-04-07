@@ -1,4 +1,4 @@
-package com.itheima.d9_chat.即时通信;
+package com.itheima.d9_InstantMessaging.IM;
 
 public class User {
 	private Integer id ;

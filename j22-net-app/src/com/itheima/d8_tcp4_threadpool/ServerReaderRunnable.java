@@ -1,14 +1,13 @@
-package com.itheima.d9_chat;
+package com.itheima.d8_tcp4_threadpool;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.PrintStream;
 import java.net.Socket;
 
-public class ClientReaderThread extends Thread{
-    private Socket socket;
-    public ClientReaderThread(Socket socket){
+public class ServerReaderRunnable implements Runnable{
+    private final Socket socket;
+    public ServerReaderRunnable(Socket socket){
         this.socket = socket;
     }
     @Override
@@ -21,11 +20,10 @@ public class ClientReaderThread extends Thread{
             // 5、按照行读取消息
             String msg;
             while ((msg = br.readLine()) != null){
-                System.out.println(socket.getRemoteSocketAddress() + "收到了: " + msg);
+                System.out.println(socket.getRemoteSocketAddress() + "说了：: " + msg);
             }
         } catch (Exception e) {
-            System.out.println("服务端把你踢出去了~~");
+            System.out.println(socket.getRemoteSocketAddress() + "下线了！！！");
         }
     }
-
 }

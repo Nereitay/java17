@@ -1,11 +1,14 @@
-package com.itheima.d10_bs;
+package com.itheima.d10_tcp5_bs;
 
-import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.*;
 
 /**
+ * 1、之前的客户端都是什么样的
+ *      - 其实就是CS架构，客户端实需要我们自己开发实现的。
+ * 2、BS结构是什么样的，需要开发客户端吗？
+ *      - 浏览器访问服务端，不需要开发客户端
     了解：BS-浏览器-服务器基本了解。
 
     引入：
@@ -19,7 +22,9 @@ import java.util.concurrent.*;
 
  */
 public class BSserverDemo {
-    // 使用静态变量记住一个线程池对象
+    /*
+     使用静态变量记住一个线程池对象
+     */
     private static ExecutorService pool = new ThreadPoolExecutor(3,
             5, 6, TimeUnit.SECONDS,
             new ArrayBlockingQueue<>(2)
@@ -27,10 +32,13 @@ public class BSserverDemo {
 
     public static void main(String[] args) {
         try {
+            /*
+             * 连接浏览器的socket
+             */
             // 1.注册端口
             ServerSocket ss = new ServerSocket(8080);
             // 2.创建一个循环接收多个客户端的请求。
-            while(true){
+            while (true) {
                 Socket socket = ss.accept();
                 // 3.交给一个独立的线程来处理！
                 pool.execute(new ServerReaderRunnable(socket));

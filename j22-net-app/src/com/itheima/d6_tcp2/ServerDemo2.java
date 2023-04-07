@@ -1,4 +1,4 @@
-package com.itheima.d6_socket2;
+package com.itheima.d6_tcp2;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -15,6 +15,11 @@ public class ServerDemo2 {
             System.out.println("===服务端启动成功===");
             // 1、注册端口
             ServerSocket serverSocket = new ServerSocket(7777);
+            /*
+            可以使用死循环控制服务端收完消息继续等待接收下一个消息
+            本案例实现了多发多收，那么是否可以同时接收多个客户端的消息？
+                - 不可以的。因为服务端现在只有一个线程，只能与一个客户端进行通信
+             */
             while (true) {
                 // 2、必须调用accept方法：等待接收客户端的Socket连接请求，建立Socket通信管道
                 Socket socket = serverSocket.accept();
@@ -24,7 +29,7 @@ public class ServerDemo2 {
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
                 // 5、按照行读取消息
                 String msg;
-                while ((msg = br.readLine()) != null){
+                while ((msg = br.readLine()) != null) {
                     System.out.println(socket.getRemoteSocketAddress() + "说了：: " + msg);
                 }
             }
@@ -33,3 +38,10 @@ public class ServerDemo2 {
         }
     }
 }
+/*
+本次多发多收是如何实现的
+    - 客户端使用循环反复地发送消息。
+    - 服务端使用循环反复地接收消息。
+现在服务端为什么不可以同时接收多个客户端的消息。
+    - 目前服务端是单线程的，每次只能处理一个客户端的消息
+ */

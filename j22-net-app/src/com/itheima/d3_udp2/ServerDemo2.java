@@ -15,7 +15,9 @@ public class ServerDemo2 {
         // 2、创建一个数据包对象接收数据（韭菜盘子）
         byte[] buffer = new byte[1024 * 64];
         DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
-
+        /*
+        接收端可以不断的接收多个发送端的消息展示
+         */
         while (true) {
             // 3、等待接收数据。
             socket.receive(packet);

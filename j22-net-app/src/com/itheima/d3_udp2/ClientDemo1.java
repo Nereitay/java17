@@ -7,6 +7,11 @@ import java.net.MulticastSocket;
 import java.util.Scanner;
 
 /**
+ * 需求: 使用UDP通信方式开发接收端和发送端。
+ * 分析
+ *      - 发送端可以一直发送消息。
+ *      - 接收端可以不断的接收多个发送端的消息展示。
+ *      - 发送端输入了exit则结束发送端程序。
   发送端  多发 多收
  */
 public class ClientDemo1 {
@@ -14,10 +19,12 @@ public class ClientDemo1 {
         System.out.println("=====客户端启动======");
 
         // 1、创建发送端对象：发送端自带默认的端口号（人）
-        DatagramSocket socket = new DatagramSocket(7777);
-        
+        DatagramSocket socket = new DatagramSocket();
 
         Scanner sc = new Scanner(System.in);
+        /*
+        发送端可以一直发送消息
+         */
         while (true) {
             System.out.println("请说：");
             String msg = sc.nextLine();

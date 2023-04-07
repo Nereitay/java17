@@ -1,15 +1,17 @@
-package com.itheima.d8_socket4;
+package com.itheima.d9_InstantMessaging;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
-public class ServerReaderRunnable implements Runnable{
-    private Socket socket;
-    public ServerReaderRunnable(Socket socket){
+public class ClientReaderThread extends Thread {
+    private final Socket socket;
+
+    public ClientReaderThread(Socket socket) {
         this.socket = socket;
     }
+
     @Override
     public void run() {
         try {
@@ -19,11 +21,12 @@ public class ServerReaderRunnable implements Runnable{
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             // 5、按照行读取消息
             String msg;
-            while ((msg = br.readLine()) != null){
-                System.out.println(socket.getRemoteSocketAddress() + "说了：: " + msg);
+            while ((msg = br.readLine()) != null) {
+                System.out.println(socket.getRemoteSocketAddress() + "收到了: " + msg);
             }
         } catch (Exception e) {
-            System.out.println(socket.getRemoteSocketAddress() + "下线了！！！");
+            System.out.println("服务端把你踢出去了~~");
         }
     }
+
 }

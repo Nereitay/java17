@@ -3,7 +3,7 @@ package com.itheima.d4_upd3;
 import java.net.*;
 
 /**
-  接收端
+  接收端 - 组播
  */
 public class ServerDemo3 {
     public static void main(String[] args) throws Exception {
@@ -11,8 +11,14 @@ public class ServerDemo3 {
         // 1、创建接收端对象：注册端口（人）
         MulticastSocket socket = new MulticastSocket(9898);
 
-        // 注意：绑定组播地址（加群）
-        socket.joinGroup(new InetSocketAddress(InetAddress.getByName("224.0.1.1") , 9898),
+        /*
+         注意：绑定组播地址（加群）
+         */
+//        socket.joinGroup(InetAddress.getByName("224.0.1.1")); // @Deprecated(since = "14")
+        socket.joinGroup(
+                new InetSocketAddress(
+                        InetAddress.getByName("224.0.1.1"),
+                        9898),
                 NetworkInterface.getByInetAddress(InetAddress.getLocalHost()));
 
         // 2、创建一个数据包对象接收数据（韭菜盘子）
@@ -26,8 +32,8 @@ public class ServerDemo3 {
             // 4、取出数据即可
             // 读取多少倒出多少
             int len = packet.getLength();
-            String rs = new String(buffer,0, len);
-            System.out.println("收到了来自：" + packet.getAddress() +", 对方端口是" + packet.getPort() +"的消息：" + rs);
+            String rs = new String(buffer, 0, len);
+            System.out.println("收到了来自：" + packet.getAddress() + ", 对方端口是" + packet.getPort() + "的消息：" + rs);
         }
     }
 }
