@@ -27,11 +27,13 @@ import java.lang.reflect.Constructor;
 
  */
 public class TestStudent01 {
-    // 1. getConstructors:
-    // 获取全部的构造器：只能获取public修饰的构造器。
-    // Constructor[] getConstructors()
+    /*
+     1. getConstructors:
+     获取全部的构造器：只能获取public修饰的构造器
+     Constructor[] getConstructors()
+     */
     @Test
-    public void getConstructors(){
+    public void getConstructors() {
         // a.第一步：获取类对象
         Class c = Student.class;
         // b.提取类中的全部的构造器对象(这里只能拿public修饰)
@@ -43,10 +45,12 @@ public class TestStudent01 {
     }
 
 
-    // 2.getDeclaredConstructors():
-    // 获取全部的构造器：只要你敢写，这里就能拿到，无所谓权限是否可及。
+    /*
+     2.getDeclaredConstructors():
+     获取全部的构造器：只要你敢写，这里就能拿到，无所谓权限是否可及
+     */
     @Test
-    public void getDeclaredConstructors(){
+    public void getDeclaredConstructors() {
         // a.第一步：获取类对象
         Class c = Student.class;
         // b.提取类中的全部的构造器对象
@@ -57,20 +61,24 @@ public class TestStudent01 {
         }
     }
 
-    // 3.getConstructor(Class... parameterTypes)
-    // 获取某个构造器：只能拿public修饰的某个构造器
+    /*
+     3.getConstructor(Class... parameterTypes)
+     获取某个构造器：只能拿public修饰的某个构造器
+     */
     @Test
     public void getConstructor() throws Exception {
         // a.第一步：获取类对象
         Class c = Student.class;
         // b.定位单个构造器对象 (按照参数定位无参数构造器 只能拿public修饰的某个构造器)
         Constructor cons = c.getConstructor();
-        System.out.println(cons.getName() + "===>" + cons.getParameterCount());
+        System.out.println(cons.getName() + "===>" + cons.getParameterCount()); //java.lang.NoSuchMethodException: com.itheima.d3_reflect_constructor.Student.<init>()
     }
 
 
-    // 4.getConstructor(Class... parameterTypes)
-    // 获取某个构造器：只要你敢写，这里就能拿到，无所谓权限是否可及。
+    /*
+    4.getDeclaredConstructor(Class... parameterTypes)
+    获取某个构造器：只要你敢写，这里就能拿到，无所谓权限是否可及。
+     */
     @Test
     public void getDeclaredConstructor() throws Exception {
         // a.第一步：获取类对象

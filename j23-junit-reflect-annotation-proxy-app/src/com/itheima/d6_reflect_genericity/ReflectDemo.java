@@ -3,14 +3,22 @@ package com.itheima.d6_reflect_genericity;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
+/**
+ *反射的作用-绕过编译阶段为集合添加数据
+ *  - 反射是作用在运行时的技术，此时集合的泛型将不能产生约束了，此时是可以为集合存入其他任意类型的元素
+ *  - 泛型只是在编译阶段可以约束集合只能操作某种数据类型，在编译成Class文件进入运行阶段的时候，其真实类型都是ArrayList了，泛型相当于被擦除了
+ */
 public class ReflectDemo {
     public static void main(String[] args) throws Exception {
         // 需求：反射实现泛型擦除后，加入其他类型的元素
         ArrayList<String> lists1 = new ArrayList<>();
         ArrayList<Integer> lists2 = new ArrayList<>();
 
-        System.out.println(lists1.getClass());
-        System.out.println(lists2.getClass());
+        /*
+        在编译成Class文件进入运行阶段的时候，其真实类型都是ArrayList了
+         */
+        System.out.println(lists1.getClass()); // class java.util.ArrayList
+        System.out.println(lists2.getClass()); // class java.util.ArrayList
 
         System.out.println(lists1.getClass() ==  lists2.getClass());  // ArrayList.class
 

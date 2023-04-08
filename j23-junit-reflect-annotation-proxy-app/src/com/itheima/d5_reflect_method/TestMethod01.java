@@ -24,8 +24,8 @@ import java.lang.reflect.Method;
           参数一：触发的是哪个对象的方法执行。
           参数二： args：调用方法时传递的实际参数
  */
-public class MethodDemo01 {
-    /**
+public class TestMethod01 {
+    /*
      * 1.获得类中的所有成员方法对象
      */
     @Test
@@ -40,26 +40,33 @@ public class MethodDemo01 {
         }
     }
 
-    /**
+    /*
      * 2. 获取某个方法对象
      */
     @Test
-    public void getDeclardMethod() throws Exception {
+    public void getDeclaredMethod() throws Exception {
         // a.获取类对象
         Class c = Dog.class;
         // b.提取单个方法对象
         Method m = c.getDeclaredMethod("eat");
         Method m2 = c.getDeclaredMethod("eat", String.class);
 
-        // 暴力打开权限了
+        /*
+         暴力打开权限了
+         */
         m.setAccessible(true);
         m2.setAccessible(true);
 
-        // c.触发方法的执行
+        /*
+         c.触发方法的执行
+         Object invoke(Object obj, Object... args)
+         */
         Dog d = new Dog();
-        // 注意：方法如果是没有结果回来的，那么返回的是null.
+        /*
+         注意：方法如果是没有结果回来的，那么返回的是null.
+         */
         Object result = m.invoke(d);
-        System.out.println(result);
+        System.out.println(result); // if the argument is null, then a string equal to "null"; otherwise, the value of obj.toString() is returned.
 
         Object result2 = m2.invoke(d, "骨头");
         System.out.println(result2);

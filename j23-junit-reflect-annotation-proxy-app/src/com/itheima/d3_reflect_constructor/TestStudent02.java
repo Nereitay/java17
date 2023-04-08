@@ -30,8 +30,12 @@ public class TestStudent02 {
         Constructor cons = c.getDeclaredConstructor();
         System.out.println(cons.getName() + "===>" + cons.getParameterCount());
 
-        // 如果遇到了私有的构造器，可以暴力反射
-        cons.setAccessible(true); // 权限被打开
+        /*
+        如果是非public的构造器，需要打开权限（暴力反射），然后再创建对象
+            - setAccessible(boolean)
+            - 反射可以破坏封装性，私有的也可以执行了
+         */
+        cons.setAccessible(true); // 如果遇到了私有的构造器，可以暴力反射,权限被打开
 
         Student s = (Student) cons.newInstance();
         System.out.println(s);

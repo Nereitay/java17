@@ -14,7 +14,7 @@ import java.lang.reflect.Field;
         Class getType(); 获取属性的类型，返回Class对象。
         String getName(); 获取属性的名称。
  */
-public class FieldDemo02 {
+public class TestField02 {
     @Test
     public void setField() throws Exception {
         // a.反射第一步，获取类对象
@@ -22,14 +22,22 @@ public class FieldDemo02 {
         // b.提取某个成员变量
         Field ageF = c.getDeclaredField("age");
 
+        /*
+        如果某成员变量是非public的，需要打开权限（暴力反射），然后再取值、赋值
+            setAccessible(boolean)
+         */
         ageF.setAccessible(true); // 暴力打开权限
 
-        // c.赋值
+        /*
+         c.赋值
+         */
         Student s = new Student();
         ageF.set(s , 18);  // s.setAge(18);
         System.out.println(s);
 
-        // d、取值
+        /*
+         d、取值
+         */
         int age = (int) ageF.get(s);
         System.out.println(age);
 

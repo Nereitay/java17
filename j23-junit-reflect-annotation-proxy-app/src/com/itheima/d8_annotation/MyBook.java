@@ -1,7 +1,10 @@
 package com.itheima.d8_annotation;
 
 public @interface MyBook {
-    String name();
+    /*
+    默认public
+     */
+    public String name();
     String[] authors();
     double price();
 }

@@ -2,7 +2,6 @@ package com.itheima.d4_reflect_field;
 
 import org.junit.Test;
 
-import java.io.File;
 import java.lang.reflect.Field;
 
 /**
@@ -22,8 +21,8 @@ import java.lang.reflect.Field;
         获取全部成员变量：getDeclaredFields
         获取某个成员变量：getDeclaredField
  */
-public class FieldDemo01 {
-    /**
+public class TestField01 {
+    /*
      * 1.获取全部的成员变量。
      * Field[] getDeclaredFields();
      *  获得所有的成员变量对应的Field对象，只要申明了就可以得到
@@ -40,7 +39,7 @@ public class FieldDemo01 {
         }
     }
 
-    /**
+    /*
         2.获取某个成员变量对象 Field getDeclaredField(String name);
      */
     @Test
