@@ -8,7 +8,11 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Dom4JTest2 {
+/**
+ * XML解析案例
+ * 需求:利用Dom4J的知识，将Contact.xml文件中的联系人数据封装成List集合，其中每个元素是实体类Contact。打印输出 List 中的每个元素
+ */
+public class TestDom4J2 {
     @Test
     public void parseToList() throws Exception {
         // 需求：解析XML中的数据成为一个List集合对象。
@@ -17,7 +21,7 @@ public class Dom4JTest2 {
         SAXReader saxReader = new SAXReader();
         // 3、加载XML文件成为文档对象Document对象。
         Document document =
-                saxReader.read(Dom4JTest2.class.getResourceAsStream("/Contacts.xml"));
+                saxReader.read(TestDom4J2.class.getResourceAsStream("/Contacts.xml"));
         // 4、先拿根元素
         Element root = document.getRootElement();
         // 5、提取contact子元素
@@ -28,8 +32,11 @@ public class Dom4JTest2 {
         for (Element contactEle : contactEles) {
             // 8、每个子元素都是一个联系人对象
             Contact contact = new Contact();
-            contact.setId(Integer.valueOf(contactEle.attributeValue("id")));
-            contact.setVip(Boolean.valueOf(contactEle.attributeValue("vip")));
+            /*
+            xml内容都是文本
+             */
+            contact.setId(Integer.parseInt(contactEle.attributeValue("id")));
+            contact.setVip(Boolean.parseBoolean(contactEle.attributeValue("vip")));
             contact.setName(contactEle.elementTextTrim("name"));
             contact.setGender(contactEle.elementTextTrim("gender").charAt(0));
             contact.setEmail(contactEle.elementText("email"));

@@ -9,6 +9,12 @@ import org.junit.Test;
 import java.util.List;
 
 /**
+ * 如果需要从XML文件中检索需要的某个信息（如name）怎么解决？
+ *      - Dom4j需要进行文件的全部解析，然后再寻找数据。
+ *      - Xpath技术更加适合做信息检索
+ * XPath介绍
+ *      - XPath在解析XML文档方面提供了一独树一帜的路径思想，更加优雅，高效
+ *      - XPath使用路径表达式来定位XML文档中的元素节点或属性节点
     目标：XPath检索XML中的信息啊。(了解)
 
     引入：
@@ -38,8 +44,8 @@ import java.util.List;
                 //元素[@属性名称]  在全文检索包含该属性的元素对象。
                 //元素[@属性名称=值]  在全文检索包含该属性的元素且属性值为该值的元素对象。
  */
-public class XPathDemo {
-    /**
+public class TestXPath {
+    /*
      1.绝对路径: /根元素/子元素/子元素。
      */
     @Test
@@ -48,7 +54,7 @@ public class XPathDemo {
         SAXReader saxReader = new SAXReader();
         // b、把XML加载成Document文档对象
         Document document =
-                saxReader.read(XPathDemo.class.getResourceAsStream("/Contacts2.xml"));
+                saxReader.read(TestXPath.class.getResourceAsStream("/Contacts2.xml"));
         // c、检索全部的名称
         List<Node> nameNodes = document.selectNodes("/contactList/contact/name");
         for (Node nameNode : nameNodes) {
@@ -57,7 +63,7 @@ public class XPathDemo {
         }
     }
 
-    /**
+    /*
      2.相对路径： ./子元素/子元素。 (.代表了当前元素)
      */
     @Test
@@ -66,7 +72,7 @@ public class XPathDemo {
         SAXReader saxReader = new SAXReader();
         // b、把XML加载成Document文档对象
         Document document =
-                saxReader.read(XPathDemo.class.getResourceAsStream("/Contacts2.xml"));
+                saxReader.read(TestXPath.class.getResourceAsStream("/Contacts2.xml"));
         Element root = document.getRootElement();
         // c、检索全部的名称
         List<Node> nameNodes = root.selectNodes("./contact/name");
@@ -76,7 +82,7 @@ public class XPathDemo {
         }
     }
 
-    /**
+    /*
      3.全文搜索：
      //元素  在全文找这个元素
      //元素1/元素2  在全文找元素1下面的一级元素2
@@ -88,7 +94,7 @@ public class XPathDemo {
         SAXReader saxReader = new SAXReader();
         // b、把XML加载成Document文档对象
         Document document =
-                saxReader.read(XPathDemo.class.getResourceAsStream("/Contacts2.xml"));
+                saxReader.read(TestXPath.class.getResourceAsStream("/Contacts2.xml"));
         // c、检索数据
         //List<Node> nameNodes = document.selectNodes("//name");
         // List<Node> nameNodes = document.selectNodes("//contact/name");
@@ -99,7 +105,7 @@ public class XPathDemo {
         }
     }
 
-    /**
+    /*
      4.属性查找。
      //@属性名称  在全文检索属性对象。
      //元素[@属性名称]  在全文检索包含该属性的元素对象。
@@ -111,15 +117,15 @@ public class XPathDemo {
         SAXReader saxReader = new SAXReader();
         // b、把XML加载成Document文档对象
         Document document =
-                saxReader.read(XPathDemo.class.getResourceAsStream("/Contacts2.xml"));
-        // c、检索数据
+                saxReader.read(TestXPath.class.getResourceAsStream("/Contacts2.xml"));
+        // c、检索数据 定位节点
         List<Node> nodes = document.selectNodes("//@id");
         for (Node node : nodes) {
             Attribute attr = (Attribute) node;
             System.out.println(attr.getName() + "===>" + attr.getValue());
         }
 
-        // 查询name元素（包含id属性的）
+        // 查询name元素（包含id属性的） 定位元素
 //      Node node = document.selectSingleNode("//name[@id]");
         Node node = document.selectSingleNode("//name[@id=888]");
         Element ele = (Element) node;

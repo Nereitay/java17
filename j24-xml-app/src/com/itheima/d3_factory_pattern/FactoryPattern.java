@@ -1,7 +1,7 @@
 package com.itheima.d3_factory_pattern;
 
 public class FactoryPattern {
-    /**
+    /*
        定义一个方法，创建对象返回
      */
     public static Computer createComputer(String info){

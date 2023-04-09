@@ -4,13 +4,22 @@
     <name>女儿国王</name>
     <sex>女</sex>
     <hobby>唐僧，追唐僧</hobby>
+    <!--标签可以嵌套， 必须能够正确的嵌套-->
     <info>
         <age>30</age>
         <addr>女儿国</addr>
     </info>
     <sql>
+        <!-- XML文件中可以存在以下特殊字符
+           &lt;    <  小于
+           &gt;    >  大于
+           &amp;   &  和号
+           &apos;  '  单引号
+           &quot;  "  引号
+         -->
         select * from user where age &lt; 18;
         select * from user where age &lt; 18 &amp;&amp; age > 10
+        <!--  CD快捷键  -->
         <![CDATA[
                 select * from user where age < 18
         ]]>

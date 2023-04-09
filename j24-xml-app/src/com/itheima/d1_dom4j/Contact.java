@@ -16,11 +16,11 @@ public class Contact {
     public Contact() {
     }
 
-    public Contact(String name, int id, boolean vip, char gendar, String email) {
+    public Contact(String name, int id, boolean vip, char gender, String email) {
         this.name = name;
         this.id = id;
         this.vip = vip;
-        this.gender = gendar;
+        this.gender = gender;
         this.email = email;
     }
 

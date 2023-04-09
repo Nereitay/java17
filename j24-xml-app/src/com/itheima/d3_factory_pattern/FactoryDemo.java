@@ -20,9 +20,11 @@ package com.itheima.d3_factory_pattern;
 public class FactoryDemo {
     public static void main(String[] args) {
         Computer c1 = FactoryPattern.createComputer("huawei");
+        assert c1 != null;
         c1.start();
 
         Computer c2 = FactoryPattern.createComputer("mac");
+        assert c2 != null;
         c2.start();
     }
 }
